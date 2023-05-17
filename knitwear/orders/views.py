@@ -37,5 +37,10 @@ def index(request):
     return render(request, 'index.html', context)
 
 
-
+def catalog(request):
+    context = {
+        'title': 'Каталог',
+        
+    }
+    return render(request, 'catalog.html', context)
 
