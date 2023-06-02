@@ -7,11 +7,9 @@
       id="simple-list-example"
       class="d-flex flex-column gap-2 simple-list-example-scrollspy text-center"
     >
-      <a class="p-1 rounded" href="#simple-list-item-1">Шапки</a>
-      <a class="p-1 rounded" href="#simple-list-item-2">Шарфы</a>
-      <a class="p-1 rounded" href="#simple-list-item-3">Детские игрушки</a>
-      <a class="p-1 rounded" href="#simple-list-item-4">Товары для собак</a>
-      <a class="p-1 rounded" href="#simple-list-item-5">Кофты</a>
+      {% for category in categories %}
+      <a class="p-1 rounded" href="#simple-list-item">{{ category.name }}</a>
+      {% endfor %}
     </div>
   </div>
   <div class="col-8">
