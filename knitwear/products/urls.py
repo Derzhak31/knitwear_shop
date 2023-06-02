@@ -1,5 +1,8 @@
-def main():
-    pass
-    
-if __name__ == '__main__':
-    main()
+from django.urls import path
+from products.views import products
+
+app_name = 'products'
+
+urlpatterns = [
+    path('', products, name='index')
+]

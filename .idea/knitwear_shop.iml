@@ -11,6 +11,7 @@
     <option name="namespacePackageFolders">
       <list>
         <option value="$MODULE_DIR$/knitwear/static" />
+        <option value="$MODULE_DIR$/knitwear/users/templates/users" />
       </list>
     </option>
   </component>

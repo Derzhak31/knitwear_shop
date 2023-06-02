@@ -25,6 +25,8 @@
             <img
                     src="{% static 'img/logo.png' %}"
                     alt="logo"
+                    >]
+
                     width="40"
                     height="40"
             />Зайцева М.Н.
@@ -175,7 +177,7 @@
                                     placeholder="Пароль"
                             />
                         </li>
-                        <li><a class="dropdown-item" href="#">Войти</a><a href="#"
+                        <li><a class="dropdown-item" href="{% url 'users:login' %}">Войти</a><a href="#"
                         ><i
                                 class="fa-brands fa-google fa-xl"
                                 style="color: #fff700"
@@ -188,7 +190,7 @@
                             <hr class="dropdown-divider"/>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">Зарегистрироваться</a>
+                            <a class="dropdown-item" href="{% url 'users:registration' %}">Зарегистрироваться</a>
                         </li>
                     </ul>
                 </li>
