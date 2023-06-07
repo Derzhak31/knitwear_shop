@@ -3,6 +3,5 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    birthday = models.DateField(null=True, blank=True)
-    sex = models.BooleanField(null=True, blank=True)
-
+    birthday = models.DateField(max_length=8, null=True)
+    sex = models.CharField(max_length=7)
