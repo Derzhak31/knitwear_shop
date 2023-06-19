@@ -1,4 +1,5 @@
 {% load static %}
+{% load products_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,9 +20,9 @@
     {% block css %} {% endblock%}
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-info">
+<nav class="navbar sticky-top navbar-expand-lg bg-info">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{% url 'index' %}">
             <img
                     src="{% static 'img/logo.png' %}"
                     alt="logo"
@@ -42,18 +43,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 top-menu">
+                {% for m in menu %}
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url 'index' %}">Главная</a>
+                    <a class="nav-link" href="{% url m.url_name %}">{{ m.title }}</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'products:index' %}">Каталог</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Оплата</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Контакты</a>
-                </li>
+                {% endfor %}
             </ul>
 
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -144,50 +138,50 @@
                 </li>
 
                 {% if user.is_authenticated %}
-                    <li class="nav-item dropdown">
-                        <a
+                <li class="nav-item dropdown">
+                    <a
                             class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false" href="#"
-                        >{{ user.username }}
-                            <i
-                            class="fa-solid fa-user-tie fa-xl"
-                            style="color: #00FA9A"
-                            ></i>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item" href="{% url 'users:profile' %}">Профиль</a>
-                            </li>
-                            <li><a class="dropdown-item" href="#">Заказы</a></li>
-                            {% if user.is_superuser or user.is_staff %}
-                                <li>
-                                    <a class="dropdown-item" href="{% url 'admin:index' %}">
-                                        Админ-панель
-                                    </a>
-                                </li>
-                            {% endif %}
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="{% url 'users:logout' %}">
-                                    Выйти
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                    >{{ user.username }}
+                        <i
+                                class="fa-solid fa-user-tie fa-xl"
+                                style="color: #00FA9A"
+                        ></i>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" href="{% url 'users:profile' %}">Профиль</a>
+                        </li>
+                        <li><a class="dropdown-item" href="#">Заказы</a></li>
+                        {% if user.is_superuser or user.is_staff %}
+                        <li>
+                            <a class="dropdown-item" href="{% url 'admin:index' %}">
+                                Админ-панель
+                            </a>
+                        </li>
+                        {% endif %}
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{% url 'users:logout' %}">
+                                Выйти
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 {% else %}
-                    <li class="nav-item">
-                        <a
+                <li class="nav-item">
+                    <a
                             class="nav-link"
                             href="{% url 'users:login' %}"
-                        >Вход
-                            <i
-                            class="fa-solid fa-user-tie fa-xl"
-                            style="color: #ff0000"
-                            ></i>
-                        </a>
-                    </li>
+                    >Вход
+                        <i
+                                class="fa-solid fa-user-tie fa-xl"
+                                style="color: #ff0000"
+                        ></i>
+                    </a>
+                </li>
                 {% endif %}
             </ul>
         </div>
@@ -197,7 +191,7 @@
 {% block content %}{% endblock%}
 
 <footer>
-    <section class="footer">
+    <section class="footer fixed-bottom">
         <div class="container">
             <div class="row text-center">
                 <div class="col">

@@ -1,22 +1,64 @@
-from django.shortcuts import render
-from products.models import Product, ProductCategory, ProductBadge
+from django.http import Http404
+from django.shortcuts import render, get_object_or_404
+from products.models import *
+
+menu = [
+    {'title': 'Главная', 'url_name': 'index'},
+    {'title': 'Каталог', 'url_name': 'products:index'},
+    {'title': 'Оплата', 'url_name': 'payment'},
+    {'title': 'Контакты', 'url_name': 'contacts'}
+]
 
 
 def index(request):
     context = {
-        'title': 'Зайцева',
+        'menu': menu,
+        'title': 'Главная',
         'products': Product.objects.all(),
-        'badge': ProductBadge.objects.all(),
     }
     return render(request, 'products/index.html', context)
 
 
-def products(request):
+def catalog(request):
     context = {
+        'menu': menu,
         'title': 'Каталог',
         'products': Product.objects.all(),
-        'categories': ProductCategory.objects.all(),
-        'badge': ProductBadge.objects.all(),
     }
-    return render(request, 'products/products.html', context)
+    return render(request, 'products/catalog.html', context)
 
+
+def show_product(request, product_slug):
+    product = get_object_or_404(Product, slug=product_slug)
+    context = {
+        'product': product,
+        'title': product.name,
+        'category': product.category.name,
+    }
+    return render(request, 'products/product.html', context)
+
+
+def show_category(request, category_slug):
+    categories = get_object_or_404(ProductCategory, slug=category_slug)
+    context = {
+        'categories': categories,
+        'menu': menu,
+        'title': 'Отображение по категориям',
+    }
+    return render(request, 'products/catalog.html', context)
+
+
+def payment(request):
+    context = {
+        'menu': menu,
+        'title': 'Оплата',
+    }
+    return render(request, 'products/payment.html', context)
+
+
+def contacts(request):
+    context = {
+        'menu': menu,
+        'title': 'Контакты',
+    }
+    return render(request, 'products/contacts.html', context)
