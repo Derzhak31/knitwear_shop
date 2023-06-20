@@ -9,9 +9,6 @@ class ProductCategory(models.Model):
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
-        return reverse('products:category', kwargs={'category_slug': self.slug})
-
     class Meta:
         verbose_name = 'Категорию'
         verbose_name_plural = 'Категории'

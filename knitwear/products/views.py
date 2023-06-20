@@ -1,4 +1,3 @@
-from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from products.models import *
 
@@ -36,16 +35,6 @@ def show_product(request, product_slug):
         'category': product.category.name,
     }
     return render(request, 'products/product.html', context)
-
-
-def show_category(request, category_slug):
-    categories = get_object_or_404(ProductCategory, slug=category_slug)
-    context = {
-        'categories': categories,
-        'menu': menu,
-        'title': 'Отображение по категориям',
-    }
-    return render(request, 'products/catalog.html', context)
 
 
 def payment(request):
