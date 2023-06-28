@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    "debug_toolbar",
+
     'products.apps.ProductsConfig',
     'users.apps.UsersConfig',
 ]
@@ -48,6 +50,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'knitwear.urls'
@@ -126,3 +130,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Users
 
 AUTH_USER_MODEL = 'users.User'
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]

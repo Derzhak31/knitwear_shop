@@ -3,17 +3,23 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
-from products.views import index, contacts, payment
+from products.views import Index, Contacts, Payment
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name='index'),
-    path('payment/', payment, name='payment'),
-    path('contacts/', contacts, name='contacts'),
+    path('', Index.as_view(), name='index'),
+    path('payment/', Payment.as_view(), name='payment'),
+    path('contacts/', Contacts.as_view(), name='contacts'),
     path('products/', include('products.urls')),
-    path('users/', include('users.urls', namespace='users')),
-
+    path('users/', include('users.urls')),
 ]
 
 if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls))
+    ] + urlpatterns
+
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
